@@ -1,0 +1,35 @@
+provider "aws" {
+  region = "eu-central-1"
+}
+resource "aws_security_group" "example" {
+  name_prefix = "example-"
+  ingress {
+    from_port   = 0
+    to_port     = 5432
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+resource "aws_db_parameter_group" "education" {
+  name_prefix = "hepapi"
+  family      = "postgres16"
+
+  parameter {
+    name  = "log_connections"
+    value = "1"
+  }
+}
+resource "aws_db_instance" "example" {
+  identifier            = "hepapi-internal-task"
+  allocated_storage     = 20
+  storage_type          = "gp2"
+  engine                = "postgres"
+  instance_class        = "db.t3.micro"
+  username              = "postgres"
+  password              = "postgres"
+  publicly_accessible   = true
+  skip_final_snapshot   = true
+  tags = {
+    Env = "test"
+  }
+}
