@@ -43,4 +43,4 @@ jobs:
         kubectl apply -f petclinic-secrets.yaml --insecure-skip-tls-verify 
         kubectl apply -f postgres-configmap.yaml --insecure-skip-tls-verify  
         kubectl apply -f postgres-secret.yaml --insecure-skip-tls-verify 
-        kubectl apply -f pvc.yaml --insecure-skip-tls-verify 
+        kubectl apply -f postgres-pvc.yaml --insecure-skip-tls-verify 
