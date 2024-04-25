@@ -8,8 +8,9 @@ COPY pom.xml .
 COPY src/ src/
 RUN mvn clean package -DskipTests
 
-# Second Stage: Create the runtime image
-FROM openjdk:17-jdk-slim-buster
+# Second Stage: Create the runtime image use JRE 
+# TODO : use JRE for runtime 
+FROM openjdk:17-jdk-slim-buster 
 
 WORKDIR /app
 

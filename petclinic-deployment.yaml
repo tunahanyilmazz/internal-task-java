@@ -19,15 +19,20 @@ spec:
           ports:
             - containerPort: 8080
           env:
-            - name: SPRING_DATASOURCE_URL
-              value: "jdbc:postgresql://postgres.default.svc.cluster.local:5432/postgres"
-            - name: SPRING_DATASOURCE_USERNAME
-              value: "petclinic"
-            - name: SPRING_DATASOURCE_PASSWORD
-              value: "petclinic"
+            - name: POSTGRES_URL
+              valueFrom:
+                secretKeyRef:
+                  name: petclinic-secrets
+                  key: POSTGRES_URL
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: petclinic-secrets
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: petclinic-secrets
+                  key: POSTGRES_PASS
             - name: SPRING_JPA_DATABASE_PLATFORM
               value: "org.hibernate.dialect.PostgreSQLDialect"
-            - name: DATABASE_PLATFORM
-              value: "postgres"
-            - name: SPRING_PROFILES_ACTIVE  
-              value: "postgres" 
