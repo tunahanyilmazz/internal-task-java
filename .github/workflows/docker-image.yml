@@ -30,11 +30,11 @@ jobs:
 
     - name: Deploy to Kubernetes
       run: |
-        kubectl apply -f petclinic-deployment.yaml --validate=false
-        kubectl apply -f petclinic-service.yaml --validate=false
-        kubectl apply -f postgres-deployment.yaml --validate=false
-        kubectl apply -f pv.yaml --validate=false
-        kubectl apply -f petclinic-secrets.yaml --validate=false
-        kubectl apply -f postgres-configmap.yaml --validate=false
-        kubectl apply -f postgres-secret.yaml --validate=false
-        kubectl apply -f pvc.yaml --validate=false
+        kubectl apply -f petclinic-deployment.yaml --insecure-skip-tls-verify 
+        kubectl apply -f petclinic-service.yaml --insecure-skip-tls-verify 
+        kubectl apply -f postgres-deployment.yaml --insecure-skip-tls-verify 
+        kubectl apply -f pv.yaml --insecure-skip-tls-verify 
+        kubectl apply -f petclinic-secrets.yaml --insecure-skip-tls-verify 
+        kubectl apply -f postgres-configmap.yaml --insecure-skip-tls-verify  
+        kubectl apply -f postgres-secret.yaml --insecure-skip-tls-verify 
+        kubectl apply -f pvc.yaml --insecure-skip-tls-verify 
