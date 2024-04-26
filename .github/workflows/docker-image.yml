@@ -22,26 +22,20 @@ jobs:
       run: |
         docker build -t tunahanyilmaz/petclinic:latest .
         docker push tunahanyilmaz/petclinic:latest
-     
 
-    - name: Download kubectl
-      run: |
-        curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-        chmod +x ./kubectl
-        sudo mv ./kubectl /usr/local/bin/kubectl
+    - name: Authorization with config file
+      uses: actions-hub/kubectl@master
+      env:
+        KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
+      with:
+        args: -f petclinic-deployment.yaml --insecure-skip-tls-verify 
+              -f petclinic-service.yaml --insecure-skip-tls-verify 
+              -f postgres-deployment.yaml --insecure-skip-tls-verify 
+              -f pv.yaml --insecure-skip-tls-verify 
+              -f petclinic-secrets.yaml --insecure-skip-tls-verify 
+              -f postgres-config.yaml --insecure-skip-tls-verify  
+              -f postgres-secret.yaml --insecure-skip-tls-verify 
+              -f postgres-pvc.yaml --insecure-skip-tls-verify 
 
-    - name: Set up Kubeconfig
-      run: |
-        mkdir -p $HOME/.kube
-        echo "${{ secrets.KUBECONFIG }}" | base64 -d > $HOME/.kube/config
 
-    - name: Deploy to Kubernetes
-      run: |
-        kubectl apply -f petclinic-deployment.yaml --insecure-skip-tls-verify 
-        kubectl apply -f petclinic-service.yaml --insecure-skip-tls-verify 
-        kubectl apply -f postgres-deployment.yaml --insecure-skip-tls-verify 
-        kubectl apply -f pv.yaml --insecure-skip-tls-verify 
-        kubectl apply -f petclinic-secrets.yaml --insecure-skip-tls-verify 
-        kubectl apply -f postgres-config.yaml --insecure-skip-tls-verify  
-        kubectl apply -f postgres-secret.yaml --insecure-skip-tls-verify 
-        kubectl apply -f postgres-pvc.yaml --insecure-skip-tls-verify 
+   
