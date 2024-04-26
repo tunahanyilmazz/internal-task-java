@@ -22,6 +22,7 @@ jobs:
       run: |
         docker build -t tunahanyilmaz/petclinic:latest .
         docker push tunahanyilmaz/petclinic:latest
+        TODO latest tag ı versiyonlamak lazım 
 
     - name: Download kubectl
       run: |
@@ -41,6 +42,6 @@ jobs:
         kubectl apply -f postgres-deployment.yaml --insecure-skip-tls-verify 
         kubectl apply -f pv.yaml --insecure-skip-tls-verify 
         kubectl apply -f petclinic-secrets.yaml --insecure-skip-tls-verify 
-        kubectl apply -f postgres-configmap.yaml --insecure-skip-tls-verify  
+        kubectl apply -f postgres-config.yaml --insecure-skip-tls-verify  
         kubectl apply -f postgres-secret.yaml --insecure-skip-tls-verify 
         kubectl apply -f postgres-pvc.yaml --insecure-skip-tls-verify 

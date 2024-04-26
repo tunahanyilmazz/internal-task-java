@@ -5,6 +5,5 @@ metadata:
   labels:
     group: db
 data:
-  POSTGRES_DB: petclinic
+  POSTGRES_DB: postgres
   POSTGRES_USER: petclinic
-  POSTGRES_PASSWORD: petclinic
