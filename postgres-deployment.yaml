@@ -1,3 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-config
+  labels:
+    group: db
+data:
+  POSTGRES_DB: postgres
+  POSTGRES_USER: petclinic
+  POSTGRES_PASSWORD: petclinic
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
