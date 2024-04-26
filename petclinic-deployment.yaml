@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: petclinic
-          image: tunahanyilmaz/petclinic:TAG_PLACEHOLDER
+          image: tunahanyilmaz/petclinic:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
