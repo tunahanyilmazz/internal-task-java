@@ -15,6 +15,7 @@ spec:
       containers:
         - name: petclinic
           image: tunahanyilmaz/petclinic:latest
+          TODO image i tag i bulacak sekilde ayarla 
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
