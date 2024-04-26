@@ -36,10 +36,10 @@ jobs:
 
     - name: Apply YAML files
       run: |
-          cat ${{ steps.build-and-push.outputs.image_tag }}
+          cat '$IMAGE_TAG'
           echo ${{ steps.build-and-push.outputs.image_tag }}
           cat petclinic-deployment.yaml
-          sed -i "s|tunahanyilmaz/petclinic:latest|tunahanyilmaz/petclinic:MWY5NzU0NWI4|g" petclinic-deployment.yaml
+          sed -i "s|tunahanyilmaz/petclinic:latest|tunahanyilmaz/petclinic:$IMAGE_TAG|g" petclinic-deployment.yaml
           cat petclinic-deployment.yaml
           echo $IMAGE_TAG
           cat $IMAGE_TAG
