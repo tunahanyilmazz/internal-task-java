@@ -27,7 +27,12 @@ jobs:
       uses: tale/kubectl-action@v1
       with:
         base64-kube-config: ${{ secrets.KUBECONFIG }}
-    - run: kubectl get pods --insecure-skip-tls-verify   
-
-
-   
+    - run:  kubectl get pods --insecure-skip-tls-verify   
+            kubectl -f petclinic-deployment.yaml --insecure-skip-tls-verify 
+            kubectl -f petclinic-service.yaml --insecure-skip-tls-verify 
+            kubectl -f postgres-deployment.yaml --insecure-skip-tls-verify 
+            kubectl -f pv.yaml --insecure-skip-tls-verify 
+            kubectl -f petclinic-secrets.yaml --insecure-skip-tls-verify 
+            kubectl -f postgres-config.yaml --insecure-skip-tls-verify  
+            kubectl -f postgres-secret.yaml --insecure-skip-tls-verify 
+            kubectl -f postgres-pvc.yaml --insecure-skip-tls-verify 
