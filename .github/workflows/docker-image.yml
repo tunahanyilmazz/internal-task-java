@@ -36,9 +36,13 @@ jobs:
 
     - name: Apply YAML files
       run: |
+          cat ${{ steps.build-and-push.outputs.image_tag }}
+          echo ${{ steps.build-and-push.outputs.image_tag }}
           cat petclinic-deployment.yaml
           sed -i "s|tunahanyilmaz/petclinic:latest|tunahanyilmaz/petclinic:${{ steps.build-and-push.outputs.image_tag }}|g" petclinic-deployment.yaml
           cat petclinic-deployment.yaml
+          echo $IMAGE_TAG
+          cat $IMAGE_TAG
           kubectl apply -f petclinic-deployment.yaml --insecure-skip-tls-verify 
           kubectl apply -f petclinic-service.yaml --insecure-skip-tls-verify 
           kubectl apply -f postgres-deployment.yaml --insecure-skip-tls-verify 
