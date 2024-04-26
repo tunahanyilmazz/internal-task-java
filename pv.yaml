@@ -4,7 +4,7 @@ metadata:
   name: postgres-persistent-volume
 spec:
   capacity:
-    storage: 2Gi  # Adjust the storage capacity as needed
+    storage: 4Gi  # Adjust the storage capacity as needed
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain  # Adjust based on your reclaim policy
