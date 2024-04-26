@@ -26,7 +26,7 @@ jobs:
     - name: Authorization with config file
       uses: actions-hub/kubectl@master
       env:
-        KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
+        KUBE_CONFIG: ${{ secrets.KUBECONFIG }}
       with:
         args: -f petclinic-deployment.yaml  
 
