@@ -32,6 +32,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import jakarta.validation.Valid;
 
@@ -43,6 +45,7 @@ import jakarta.validation.Valid;
  */
 @Controller
 class OwnerController {
+	private static final Logger logger = LoggerFactory.getLogger(OwnerController.class);
 
 	private static final String VIEWS_OWNER_CREATE_OR_UPDATE_FORM = "owners/createOrUpdateOwnerForm";
 
@@ -74,8 +77,9 @@ class OwnerController {
 		if (result.hasErrors()) {
 			return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
 		}
-
+	
 		this.owners.save(owner);
+		logger.info("New owner added: {}", owner); // Log the new owner
 		return "redirect:/owners/" + owner.getId();
 	}
 
