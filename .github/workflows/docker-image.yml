@@ -27,6 +27,7 @@ jobs:
           docker build -t tunahanyilmaz/petclinic:$IMAGE_TAG .
           docker push tunahanyilmaz/petclinic:$IMAGE_TAG
           echo "::set-output name=image_tag::$IMAGE_TAG"
+          
   
     - name: Deploy to Kubernetes
       uses: tale/kubectl-action@v1
@@ -36,6 +37,7 @@ jobs:
     - name: Apply YAML files
       run: |
           sed -i "s|tunahanyilmaz/petclinic:TAG_PLACEHOLDER|tunahanyilmaz/petclinic:${{ steps.build-and-push.outputs.image_tag }}|g" petclinic-deployment.yaml
+          echo petclinic-deployment.yaml
           kubectl apply -f petclinic-deployment.yaml --insecure-skip-tls-verify 
           kubectl apply -f petclinic-service.yaml --insecure-skip-tls-verify 
           kubectl apply -f postgres-deployment.yaml --insecure-skip-tls-verify 
