@@ -23,20 +23,12 @@ jobs:
         docker build -t tunahanyilmaz/petclinic:latest .
         docker push tunahanyilmaz/petclinic:latest
 
-    - name: Authorization with config file
+    - name: Deploy to Kubernetes
       uses: actions-hub/kubectl@master
       env:
         KUBE_CONFIG: ${{ secrets.KUBECONFIG }}
       with:
-        run: |
-          kubectl apply -f petclinic-deployment.yaml --insecure-skip-tls-verify 
-          kubectl apply -f petclinic-service.yaml --insecure-skip-tls-verify 
-          kubectl apply -f postgres-deployment.yaml --insecure-skip-tls-verify 
-          kubectl apply -f pv.yaml --insecure-skip-tls-verify 
-          kubectl apply -f petclinic-secrets.yaml --insecure-skip-tls-verify 
-          kubectl apply -f postgres-config.yaml --insecure-skip-tls-verify  
-          kubectl apply -f postgres-secret.yaml --insecure-skip-tls-verify 
-          kubectl apply -f postgres-pvc.yaml --insecure-skip-tls-verify 
+        args: get pods
 
 
    
