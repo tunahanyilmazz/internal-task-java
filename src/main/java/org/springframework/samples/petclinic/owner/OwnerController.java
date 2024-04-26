@@ -45,6 +45,7 @@ import jakarta.validation.Valid;
  */
 @Controller
 class OwnerController {
+
 	private static final Logger logger = LoggerFactory.getLogger(OwnerController.class);
 
 	private static final String VIEWS_OWNER_CREATE_OR_UPDATE_FORM = "owners/createOrUpdateOwnerForm";
@@ -77,7 +78,7 @@ class OwnerController {
 		if (result.hasErrors()) {
 			return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
 		}
-	
+
 		this.owners.save(owner);
 		logger.info("New owner added: {}", owner); // Log the new owner
 		return "redirect:/owners/" + owner.getId();
