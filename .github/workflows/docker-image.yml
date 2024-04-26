@@ -28,7 +28,15 @@ jobs:
       env:
         KUBE_CONFIG: ${{ secrets.KUBECONFIG }}
       with:
-        args: -f petclinic-deployment.yaml  
+        run: |
+          kubectl apply -f petclinic-deployment.yaml --insecure-skip-tls-verify 
+          kubectl apply -f petclinic-service.yaml --insecure-skip-tls-verify 
+          kubectl apply -f postgres-deployment.yaml --insecure-skip-tls-verify 
+          kubectl apply -f pv.yaml --insecure-skip-tls-verify 
+          kubectl apply -f petclinic-secrets.yaml --insecure-skip-tls-verify 
+          kubectl apply -f postgres-config.yaml --insecure-skip-tls-verify  
+          kubectl apply -f postgres-secret.yaml --insecure-skip-tls-verify 
+          kubectl apply -f postgres-pvc.yaml --insecure-skip-tls-verify 
 
 
    
