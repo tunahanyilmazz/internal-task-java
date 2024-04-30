@@ -39,7 +39,7 @@ jobs:
     - name: Apply YAML files
       run: |
           cat petclinic-deployment.yaml
-          sed -i "s|tunahanyilmaz/petclinic:latest|tunahanyilmaz/petclinic:${{ steps.build-and-push.outputs.image_tag }}|g" petclinic-deployment.yaml
+          sed -i "" "s|tunahanyilmaz/petclinic:latest|tunahanyilmaz/petclinic:${{ steps.build-and-push.outputs.image_tag }}|g" petclinic-deployment.yaml
           cat petclinic-deployment.yaml
           kubectl apply -f petclinic-deployment.yaml --insecure-skip-tls-verify 
           kubectl apply -f petclinic-service.yaml --insecure-skip-tls-verify 
