@@ -87,7 +87,7 @@ class CrashControllerIntegrationTests {
 		assertThat(resp.getStatusCode().is5xxServerError());
 		assertThat(resp.getBody()).isNotNull();
 		// html:
-		assertThat(resp.getBody()).containsSubsequence("<body>", "<h2>", "Bir sorun olustu...", "</h2>", "<p>",
+		assertThat(resp.getBody()).containsSubsequence("<body>", "<h2>", "Bir sorun oldu...", "</h2>", "<p>",
 				"Expected:", "controller", "used", "to", "showcase", "what", "happens", "when", "an", "exception", "is",
 				"thrown", "</p>", "</body>");
 		// Not the whitelabel error page:
