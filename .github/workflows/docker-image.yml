@@ -24,10 +24,11 @@ jobs:
     - name: Build Docker image
       id: build-and-push   
       run: |
-          IMAGE_TAG=$(echo $(date +%s) | sha256sum | base64 | head -c 12 ; echo)
-          docker build -t tunahanyilmaz/petclinic:$IMAGE_TAG .
-          docker push tunahanyilmaz/petclinic:$IMAGE_TAG
-          echo "::set-output name=image_tag::$IMAGE_TAG"
+        # Using shasum for macOS instead of sha256sum
+        IMAGE_TAG=$(echo $(date +%s) | shasum -a 256 | base64 | head -c 12 ; echo)
+        docker build -t tunahanyilmaz/petclinic:$IMAGE_TAG .
+        docker push tunahanyilmaz/petclinic:$IMAGE_TAG
+        echo "::set-output name=image_tag::$IMAGE_TAG"
           
   
     - name: Deploy to Kubernetes
