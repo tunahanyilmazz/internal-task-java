@@ -1,0 +1,9 @@
+resources:
+  - petclinic-deployment.yaml
+  - petclinic-service.yaml
+  - postgres-deployment.yaml
+  - pv.yaml
+  - petclinic-secrets.yaml
+  - postgres-config.yaml
+  - postgres-secret.yaml
+  - postgres-pvc.yaml

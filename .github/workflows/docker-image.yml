@@ -36,16 +36,10 @@ jobs:
       with:
         base64-kube-config: ${{ secrets.KUBECONFIG }}
 
-    - name: Apply YAML files
+    - name: Apply YAML files with Kustomize
       run: |
-          cat petclinic-deployment.yaml
-          sed -i "" "s|tunahanyilmaz/petclinic:latest|tunahanyilmaz/petclinic:${{ steps.build-and-push.outputs.image_tag }}|g" petclinic-deployment.yaml
-          cat petclinic-deployment.yaml
-          kubectl apply -f petclinic-deployment.yaml --insecure-skip-tls-verify 
-          kubectl apply -f petclinic-service.yaml --insecure-skip-tls-verify 
-          kubectl apply -f postgres-deployment.yaml --insecure-skip-tls-verify 
-          kubectl apply -f pv.yaml --insecure-skip-tls-verify 
-          kubectl apply -f petclinic-secrets.yaml --insecure-skip-tls-verify 
-          kubectl apply -f postgres-config.yaml --insecure-skip-tls-verify  
-          kubectl apply -f postgres-secret.yaml --insecure-skip-tls-verify 
-          kubectl apply -f postgres-pvc.yaml --insecure-skip-tls-verify 
+        # Install Kustomize if not already installed (Check version or installation first as needed)
+        brew install kustomize
+        
+        # Use Kustomize to build and apply the configuration
+        kustomize build k8s/overlays/production | kubectl apply --insecure-skip-tls-verify -f -
