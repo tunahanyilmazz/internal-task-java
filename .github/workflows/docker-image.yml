@@ -38,4 +38,6 @@ jobs:
     - name: Apply YAML files with Kustomize
       run: |
         brew install kustomize
-        kustomize build k8s/overlays/production | kubectl apply --insecure-skip-tls-verify -f -
+        kustomize build . | kubectl apply --insecure-skip-tls-verify -f -
+      working-directory: ./k8s/overlays/production
+  
