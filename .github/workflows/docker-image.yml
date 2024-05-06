@@ -24,22 +24,7 @@ jobs:
     - name: Build and Push Docker image
       id: build-and-push
       run: |
-        IMAGE_TAG=$(echo $(date +%s) | shasum -a 256 | base64 | head -c 12 ; echo)
-        echo "Building and pushing image with tag $IMAGE_TAG"
-        docker buildx build --platform linux/amd64 --push -t tunahanyilmaz/petclinic:$IMAGE_TAG .
-        echo "::set-output name=image_tag::$IMAGE_TAG"
-
-    - name: Update Deployment YAML
-      run: |
-        IMAGE_TAG=${{ steps.build-and-push.outputs.image_tag }}
-        sed -i "" "s|tunahanyilmaz/petclinic:latest|tunahanyilmaz/petclinic:$IMAGE_TAG|g" ./k8s/base/petclinic-deployment.yaml
-
-    - name: Deploy to Kubernetes
-      uses: tale/kubectl-action@v1
-      with:
-        base64-kube-config: ${{ secrets.KUBECONFIG }}
-
-    - name: Apply YAML files with Kustomize
-      run: |
-        brew install kustomize
-        kustomize build ./k8s/overlays/production | kubectl apply --insecure-skip-tls-verify -f -
+       
+        docker build -t tunahanyilmaz/petclinic:$latest.
+        docker push tunahanyilmaz/petclinic:latest
+ 
