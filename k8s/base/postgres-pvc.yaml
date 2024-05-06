@@ -4,7 +4,8 @@ metadata:
   name: postgres-persistent-volume-claim
 spec:
   accessModes:
-    - ReadWriteOnce
+  - ReadWriteOnce
+  storageClassName: standard
   resources:
     requests:
-      storage: 4Gi
+      storage: 1Gi

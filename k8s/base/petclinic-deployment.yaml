@@ -15,19 +15,12 @@ spec:
       containers:
       - name: petclinic
         image: tunahanyilmaz/petclinic:latest
-        resources:
-      requests:
-        memory: "64Mi"
-        cpu: "250m"
-      limits:
-        memory: "128Mi"
-        cpu: "500m"
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
         env:
         - name: POSTGRES_URL
-          value: "jdbc:postgresql://postgres-service.default.svc.cluster.local:5432/postgres"
+          value: "jdbc:postgresql://postgres-service:5432/postgres"
 
         - name: POSTGRES_USER
           valueFrom:

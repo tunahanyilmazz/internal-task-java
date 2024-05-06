@@ -17,34 +17,34 @@ spec:
         type: db
     spec:
       volumes:
-        - name: postgres-storage
-          persistentVolumeClaim:
-            claimName: postgres-persistent-volume-claim
+      - name: postgres-storage
+        persistentVolumeClaim:
+          claimName: postgres-persistent-volume-claim
       containers:
-        - name: postgres
-          image: postgres:14-alpine  # Update to PostgreSQL v14 image
-          ports:
-            - containerPort: 5432
-          env:
-            - name: POSTGRES_DB
-              valueFrom:
-                configMapKeyRef:
-                  name: postgres-config
-                  key: POSTGRES_DB
-            - name: POSTGRES_USER
-              valueFrom:
-                configMapKeyRef:
-                  name: postgres-config
-                  key: POSTGRES_USER
-            - name: POSTGRES_PASS
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-secret
-                  key: POSTGRES_PASS  # Adjust key to match your secret key
-          volumeMounts:
-            - name: postgres-storage
-              mountPath: /var/lib/postgresql/data
-          resources:
-            limits:
-              memory: "256Mi"
-              cpu: "500m"
+      - name: postgres
+        image: postgres:14-alpine # Update to PostgreSQL v14 image
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_DB
+          valueFrom:
+            configMapKeyRef:
+              name: postgres-config
+              key: POSTGRES_DB
+        - name: POSTGRES_USER
+          valueFrom:
+            configMapKeyRef:
+              name: postgres-config
+              key: POSTGRES_USER
+        - name: POSTGRES_PASS
+          valueFrom:
+            secretKeyRef:
+              name: petclinic-secret
+              key: POSTGRES_PASS # Adjust key to match your secret key
+        volumeMounts:
+        - name: postgres-storage
+          mountPath: /var/lib/postgresql/data
+        resources:
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
